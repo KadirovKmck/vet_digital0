@@ -1,0 +1,141 @@
+name: vet_digital
+description: A new Flutter project.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.4 <3.0.0'
+
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.2
+  equatable: ^2.0.5
+  firebase_core: ^2.3.0
+  flutter_bloc: ^8.1.1
+  get_it: ^7.2.0
+  cloud_firestore: ^4.1.0
+  flutter_native_splash: ^2.2.16
+  dartz: ^0.10.1
+  bloc: ^8.1.0
+  flutter_gen: ^5.1.0+1
+  go_router: ^5.2.0
+  hive: ^2.2.3
+  build_runner: ^2.3.2
+  flutter_svg: ^1.1.6
+  syncfusion_flutter_pdf: ^20.3.58
+  syncfusion_flutter_pdfviewer: ^20.3.58
+  flutter_screenutil: ^5.6.0
+  url_launcher: ^6.1.7
+  whatsapp_unilink: ^2.0.1+1
+  flutter_launcher_icons: ^0.11.0
+  shared_preferences: ^2.2.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+
+flutter_native_splash:
+  
+  color: "#ffffff"
+  image: assets/icons/mainlogo.png
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icons/mainlogo.png"
+  # min_sdk_android: 21 # android min sdk min:16, default 21
+  # web:
+  #   generate: true
+  #   image_path: "path/to/mainlogo.png"
+  #   background_color: "#hexcode"
+  #   theme_color: "#hexcode"
+  # windows:
+  #   generate: true
+  #   image_path: "path/to/mainlogo.png"
+  #   icon_size: 48 # min:48, max:256, default: 48
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  fonts:
+    - family: DancingScript
+      fonts:
+        - asset: assets/fonts/static/DancingScript-Bold.ttf
+        
+    - family: Popins
+      fonts:
+        - asset: assets/fonts/popins/Poppins-Black.ttf
+        - asset: assets/fonts/popins/Poppins-BlackItalic.ttf
+        - asset: assets/fonts/popins/Poppins-Bold.ttf
+        - asset: assets/fonts/popins/Poppins-BoldItalic.ttf
+        - asset: assets/fonts/popins/Poppins-ExtraBold.ttf
+        - asset: assets/fonts/popins/Poppins-ExtraBoldItalic.ttf
+        - asset: assets/fonts/popins/Poppins-ExtraLight.ttf
+        - asset: assets/fonts/popins/Poppins-ExtraLightItalic.ttf
+        - asset: assets/fonts/popins/Poppins-Italic.ttf
+        - asset: assets/fonts/popins/Poppins-Light.ttf
+        - asset: assets/fonts/popins/Poppins-LightItalic.ttf
+        - asset: assets/fonts/popins/Poppins-Medium.ttf
+        - asset: assets/fonts/popins/Poppins-MediumItalic.ttf
+        - asset: assets/fonts/popins/Poppins-Regular.ttf
+        - asset: assets/fonts/popins/Poppins-SemiBold.ttf
+        - asset: assets/fonts/popins/Poppins-Thin.ttf
+        - asset: assets/fonts/popins/Poppins-ThinItalic.ttf
+          style: italic
+
+flutter_gen:
+  output: lib/src/generated/
+  line_length: 80
+
+  integrations:
+    flutter_svg: true
+    flare_flutter: false
+    rive: false
+
+  assets:
+    enabled: true
+    package_parameter_enabled: false

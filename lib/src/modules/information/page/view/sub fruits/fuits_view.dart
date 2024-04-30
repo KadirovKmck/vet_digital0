@@ -13,55 +13,6 @@ class FruitsView extends StatefulWidget {
 }
 
 class _FruitsViewState extends State<FruitsView> {
-  final controller = TextEditingController();
-  late List<String> addToDo = [];
-  late final Future<SharedPreferences> _prefs;
-
-  @override
-  void initState() {
-    super.initState();
-    _prefs = SharedPreferences.getInstance();
-    initPrefs();
-  }
-
-  Future<void> initPrefs() async {
-    final SharedPreferences prefs = await _prefs;
-    setState(() {
-      addToDo = prefs.getStringList('addToDO') ?? [];
-    });
-  }
-
-  void addToDoList() async {
-    if (controller.text.isNotEmpty) {
-      final text = controller.text;
-      addToDo.add(text);
-      controller.clear();
-      final SharedPreferences prefs = await _prefs;
-      await prefs.setStringList('addToDO', addToDo);
-    } else {
-      return null;
-    }
-    log(addToDo.toString());
-    setState(() {});
-  }
-
-  void deleteItem(int index) async {
-    final SharedPreferences prefs = await _prefs;
-    addToDo.removeAt(index);
-    await prefs.setStringList('addToDO', addToDo);
-    setState(() {});
-  }
-
-  void toggleCompletion(int index) async {
-    final SharedPreferences prefs = await _prefs;
-    setState(() {
-      addToDo[index] = addToDo[index].startsWith('Completed:')
-          ? addToDo[index].substring(10)
-          : 'Completed: ${addToDo[index]}';
-    });
-    await prefs.setStringList('addToDO', addToDo);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,16 +92,30 @@ class _FruitsViewState extends State<FruitsView> {
                 itemCount: addToDo.length,
                 itemBuilder: (context, index) {
                   return Card(
-                    child: CheckboxListTile(
-                      value: addToDo[index].startsWith('Completed'),
-                      onChanged: (value) {
-                        toggleCompletion(index);
-                      },
-                      title: Text(
-                        addToDo[index].replaceAll('Completed: ', ''),
+                    color: addToDo[index].startsWith('Completed')
+                        ? Colors.grey
+                        : Colors.white,
+                    child: ListTile(
+                      title: CheckboxListTile(
+                        title: Text(
+                          addToDo[index].replaceAll('Completed: ', ''),
+                        ),
+                        subtitle: Text(
+                            '${dates[index].day}-${dates[index].month}-${dates[index].year}'),
+                        value: addToDo[index].startsWith('Completed'),
+                        onChanged: (value) {
+                          toggleCompletion(index);
+                        },
                       ),
-                      controlAffinity: ListTileControlAffinity.leading,
-                      secondary: IconButton(
+                      leading: IconButton(
+                        icon: const Icon(
+                          Icons.calendar_month,
+                        ),
+                        onPressed: () {
+                          showDatePickerDay(index);
+                        },
+                      ),
+                      trailing: IconButton(
                         onPressed: () {
                           deleteItem(index);
                         },
@@ -169,4 +134,93 @@ class _FruitsViewState extends State<FruitsView> {
       ),
     );
   }
+
+  @override
+  void initState() {
+    super.initState();
+    _prefs = SharedPreferences.getInstance();
+    initPrefs();
+    loadDates();
+  }
+
+  void saveDates() async {
+    final SharedPreferences prefs = await _prefs;
+    List<String> dateStrings =
+        dates.map((date) => date.toIso8601String()).toList();
+    await prefs.setStringList('dates', dateStrings);
+  }
+
+  Future<void> loadDates() async {
+    final SharedPreferences prefs = await _prefs;
+    List<String>? dateStrings = prefs.getStringList('dates');
+    if (dateStrings != null) {
+      dates = dateStrings.map((string) => DateTime.parse(string)).toList();
+    }
+  }
+
+  Future<void> initPrefs() async {
+    final SharedPreferences prefs = await _prefs;
+    setState(
+      () {
+        addToDo = prefs.getStringList('addToDO') ?? [];
+        dates =
+            List<DateTime>.generate(addToDo.length, (index) => DateTime.now());
+      },
+    );
+  }
+
+  void addToDoList() async {
+    if (controller.text.isNotEmpty) {
+      final text = controller.text;
+      addToDo.add(text);
+      dates.add(DateTime.now());
+      controller.clear();
+      final SharedPreferences prefs = await _prefs;
+      await prefs.setStringList('addToDO', addToDo);
+    } else {
+      return null;
+    }
+    log(addToDo.toString());
+    setState(() {});
+  }
+
+  void toggleCompletion(int index) async {
+    if (!addToDo[index].startsWith('Completed:')) {
+      final SharedPreferences prefs = await _prefs;
+      setState(() {
+        addToDo[index] = 'Completed: ${addToDo[index]}';
+      });
+      await prefs.setStringList('addToDO', addToDo);
+    }
+  }
+
+  void showDatePickerDay(int index) {
+    showDatePicker(
+      context: context,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2030),
+      initialDate: dates[index],
+    ).then((value) {
+      setState(() {
+        if (value != null) {
+          dates[index] = value;
+          saveDates();
+        }
+      });
+    });
+  }
+
+  void deleteItem(int index) async {
+    final SharedPreferences prefs = await _prefs;
+    addToDo.removeAt(index);
+    dates.removeAt(index);
+    await prefs.setStringList('addToDO', addToDo);
+    setState(() {});
+  }
+
+  final controller = TextEditingController();
+  late List<String> addToDo = [];
+  late final Future<SharedPreferences> _prefs;
+  bool isChek = false;
+  late List<DateTime> dates = [];
 }

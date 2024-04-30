@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vet_digital/src/app/theme/colors/app_colors.dart';
 import 'package:vet_digital/src/app/theme/typography/app_typography.dart';
-import 'package:vet_digital/src/modules/information/page/view/jerjemish_view.dart';
 import 'package:vet_digital/src/modules/information/page/view/momojemish_view.dart';
 
 class MenuPage extends StatefulWidget {

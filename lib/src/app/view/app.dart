@@ -44,14 +44,9 @@ class _AppState extends State<App> {
           create: (context) => sl<InfoNewsCubit>(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(
-            accentColor: const Color(0xFF13B9FF),
-          ),
-        ),
-        home: const HomePage(),
+        home: HomePage(),
       ),
     );
   }

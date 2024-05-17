@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vet_digital/src/app/theme/colors/app_colors.dart';
-import 'package:vet_digital/src/app/theme/typography/app_typography.dart';
-import 'package:vet_digital/src/modules/information/page/view/momojemish_view.dart';
+import 'package:vet_digital/src/modules/information/page/view/sub%20fruits/vegetebls/jerjemish_view.dart';
+import 'package:vet_digital/src/modules/information/page/view/sub%20fruits/fruits/fuits_view.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -11,86 +10,110 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  bool isViewChaneges = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 40),
-          child: Column(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => const MomojemishView()),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35),
-                      ),
-                      color: AppColors.mainColor,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/fruits.png',
-                            height: 160,
-                          ),
-                          const SizedBox(height: 13),
-                          const Text(
-                            'Мөмө жемиштер',
-                            style: AppTextStyles.robotoWhite16w400,
-                          ),
-                        ],
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isViewChaneges = true;
+                  });
+                },
+                child: Container(
+                  width: 230,
+                  height: 50,
+                  decoration: ShapeDecoration(
+                    color: isViewChaneges
+                        ? const Color(0xFF423EFF)
+                        : const Color(0xffD6CDFE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    shadows: const [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 4,
+                        offset: Offset(0, 4),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Fruits',
+                      style: TextStyle(
+                        color: isViewChaneges
+                            ? Colors.white
+                            : const Color(0xff150B3D),
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: ((context) => const MomojemishView()),
-                      ),
-                    );
-                  },
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(35),
-                      ),
-                      color: AppColors.mainColor,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/images/vegetable.png',
-                            height: 160,
-                          ),
-                          const SizedBox(height: 13),
-                          const Text(
-                            'Жер жемиштер',
-                            style: AppTextStyles.robotoWhite16w400,
-                          ),
-                        ],
+              const SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isViewChaneges = false;
+                  });
+                },
+                child: Container(
+                  width: 230,
+                  height: 50,
+                  decoration: ShapeDecoration(
+                    color: isViewChaneges
+                        ? const Color(0xffD6CDFE)
+                        : const Color(0xFF423EFF),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    shadows: const [
+                      BoxShadow(
+                        color: Color(0x3F000000),
+                        blurRadius: 4,
+                        offset: Offset(0, 4),
+                        spreadRadius: 0,
+                      )
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Vegetables',
+                      style: TextStyle(
+                        color: isViewChaneges
+                            ? const Color(0xff150B3D)
+                            : Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
               ),
             ],
-          )),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          isViewChaneges == false ? const Vegetbls() : const FrutsView(),
+         
+        ],
+      ),
     );
   }
 }

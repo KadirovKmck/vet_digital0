@@ -8,6 +8,7 @@ class NewsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: NewsList(katalogModel),
     );
   }
@@ -16,7 +17,7 @@ class NewsView extends StatelessWidget {
 List<KatalogModel> katalogModel = [
   KatalogModel(
     audio: '',
-    image: 'assets/images/apple.png',
+    image: 'assets/images/apples.png',
     name: 'Алма',
     title1:
         'Выращивание яблок требует некоторых усилий и знаний, но в целом это достижимо даже для начинающих садоводов. Вот некоторые шаги, которые могут помочь вам правильно вырастить яблоко:\n\n'

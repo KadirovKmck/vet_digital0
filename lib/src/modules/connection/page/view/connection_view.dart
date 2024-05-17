@@ -10,6 +10,7 @@ class ConnectionView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -18,7 +19,7 @@ class ConnectionView extends StatelessWidget {
             style: TextStyle(
               fontSize: 50,
               fontWeight: FontWeight.w900,
-              color: AppColors.mainColor,
+              color: Color(0xFF423EFF),
               fontFamily: 'DancingScript',
             ),
           ),
@@ -41,7 +42,7 @@ class ConnectionView extends StatelessWidget {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.mainColor,
+                backgroundColor: const Color(0xFF423EFF),
                 fixedSize: const Size(307, 48),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
